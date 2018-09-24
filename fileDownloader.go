@@ -7,7 +7,11 @@ import (
     "os"
 )
 
+// DownloadFile will download a url to a local file. It's efficient because it will
+// write as it downloads and not load the whole file into memory.
+
 func downloadFile(filePath string, url string) error {
+    
     // Create the file
     out, err := os.Create(filePath)
     
@@ -22,6 +26,7 @@ func downloadFile(filePath string, url string) error {
         return err
     }
 
+    // Write the body to a file
     _, err = io.Copy(out, resp.Body)
     if err != nil {
         return err
